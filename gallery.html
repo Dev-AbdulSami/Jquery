@@ -1,0 +1,39 @@
+<!-- To use AJAX in jQuery, you can leverage the $.ajax() method, which allows you to send asynchronous HTTP requests to the server and handle responses without refreshing the page.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>User Data</h1>
+    <button id="fetch-users">Fetch Users</button>
+    <div id="user-list"></div>
+
+   <script>
+        $("#fetch-users").click(function(){
+
+            $.ajax({
+
+                url: 'https://jsonplaceholder.typicode.com/users',
+                type: 'GET',
+                dataType: 'json',
+                success: function(users){
+                    $.each(users, function(index, user){
+                        $('#user-list').append('<p>' + user.name + ' (' + user.email + ')</p>')
+                    })
+                },
+
+                error: function() {
+                        $('#user-list').html('<p>An error occurred while fetching user data.</p>');
+                    }
+
+            })
+        })
+        
+   </script>
+</body>
+</html>
